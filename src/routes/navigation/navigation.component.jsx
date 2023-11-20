@@ -6,7 +6,8 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 // import { UserContext } from "../../contexts/user.context";
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
+import { selectIsCarOpen } from "../../store/cart/cart.selector";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import {
   NavgationContainer,
@@ -17,7 +18,8 @@ import {
 const Navgation = () => {
   // const { currentUser } = useContext(UserContext);
   const currentUser = useSelector(selectCurrentUser);
-  const { isCartOpen } = useContext(CartContext);
+  // const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCarOpen);
   const signOutHanlder = async () => {
     await signOutUser();
     // setCurrentUser(null);
