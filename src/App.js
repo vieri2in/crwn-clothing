@@ -5,6 +5,7 @@ import {
   onAuthStateChangedListener,
   // signOutUser,
   createUserDocumnetFromAuth,
+  getCurrentUser,
 } from "../src/utils/firebase/firebase.utils";
 import Home from "./routes/home/home.component";
 import Navgation from "./routes/navigation/navigation.component";
@@ -12,18 +13,20 @@ import Authentication from "./routes/authentication/authentication.component";
 import CategoriesPreview from "./routes/categories-preview/categories-preview.component";
 import Shop from "./routes/shop/shop.component";
 import CheckOut from "./routes/check-out/check-out.component";
-import { setCurrentUser } from "../src/store/user/user.action";
+import { checkUserSession } from "../src/store/user/user.action";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      dispatch(setCurrentUser(user));
-      if (user) {
-        createUserDocumnetFromAuth(user);
-      }
-    });
-    return unsubscribe;
-  }, [dispatch]);
+    // const unsubscribe = onAuthStateChangedListener((user) => {
+    //   dispatch(setCurrentUser(user));
+    //   if (user) {
+    //     createUserDocumnetFromAuth(user);
+    //   }
+    // });
+    // return unsubscribe;
+    // getCurrentUser().then((user) => console.log(user));
+    dispatch(checkUserSession());
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Navgation />}>
